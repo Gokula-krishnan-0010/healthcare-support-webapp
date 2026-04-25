@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Chatbot from "@/components/Chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
+        <Chatbot />
         <footer className="bg-white border-t border-gray-200 py-6">
           <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
             &copy; {new Date().getFullYear()} CareSupport NGO. Community Healthcare Initiative.
