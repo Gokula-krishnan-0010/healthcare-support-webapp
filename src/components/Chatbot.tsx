@@ -8,32 +8,29 @@ const Chatbot = () => {
     { text: 'Hello! How can I help you today?', isUser: false },
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const responses: { [key: string]: string } = {
-    help: 'You can request help by filling out our Support Form on the "Request Support" page.',
-    volunteer: 'We are always looking for volunteers! Please select "Volunteer Registration" in our Support Form.',
-    services: 'We offer medical expense support, a volunteer network, and health consultations.',
-    urgent: 'If this is a medical emergency, please call your local emergency services immediately.',
-    default: 'I am a simple FAQ bot. Try asking about "help", "volunteer", "services", or "urgent".',
-  };
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-
-    const userMessage = input.toLowerCase();
-    setMessages((prev) => [...prev, { text: input, isUser: true }]);
+    const userMessage = input;
+    setMessages((prev) => [...prev, { text: userMessage, isUser: true }]);
     setInput('');
+    setIsLoading(true);
 
-    setTimeout(() => {
-      let botResponse = responses.default;
-      for (const key in responses) {
-        if (userMessage.includes(key) && key !== 'default') {
-          botResponse = responses[key];
-          break;
-        }
-      }
-      setMessages((prev) => [...prev, { text: botResponse, isUser: false }]);
-    }, 500);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage }),
+      });
+      const data = await response.json();
+      setMessages((prev) => [...prev, { text: data.text, isUser: false }]);
+    } catch (error) {
+      setMessages((prev) => [...prev, { text: "Sorry, I'm having trouble connecting right now.", isUser: false }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -56,6 +53,13 @@ const Chatbot = () => {
                 </div>
               </div>
             ))}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-3 rounded-lg text-sm bg-gray-100 text-gray-500 italic">
+                  Assistant is typing...
+                </div>
+              </div>
+            )}
           </div>
           <div className="p-4 border-t border-gray-100 flex gap-2">
             <input
