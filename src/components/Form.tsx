@@ -5,7 +5,6 @@ import { useState } from 'react';
 const Form = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
     requestType: 'medical',
     message: '',
@@ -30,7 +29,7 @@ const Form = () => {
       const data = await response.json();
       setResult(data);
       if (data.success) {
-        setFormData({ name: '', email: '', phone: '', requestType: 'medical', message: '' });
+        setFormData({ name: '', phone: '', requestType: 'medical', message: '' });
       }
     } catch (error) {
       setResult({ success: false, message: 'Something went wrong. Please try again.' });
@@ -44,10 +43,10 @@ const Form = () => {
   };
 
   return (
-    <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+    <div className="bg-white dark:bg-slate-800 px-6 py-12 shadow sm:rounded-lg sm:px-12 border border-gray-200 dark:border-slate-700 transition-colors">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">
             Full Name
           </label>
           <div className="mt-2">
@@ -58,49 +57,30 @@ const Form = () => {
               required
               value={formData.name}
               onChange={handleChange}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-slate-100 dark:bg-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 transition-colors"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-              Email address
-            </label>
-            <div className="mt-2">
-              <input
-                type="email"
-                name="email"
-                id="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
-              Phone Number
-            </label>
-            <div className="mt-2">
-              <input
-                type="tel"
-                name="phone"
-                id="phone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3"
-              />
-            </div>
+        <div>
+          <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">
+            Phone Number
+          </label>
+          <div className="mt-2">
+            <input
+              type="tel"
+              name="phone"
+              id="phone"
+              required
+              value={formData.phone}
+              onChange={handleChange}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-slate-100 dark:bg-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 transition-colors"
+            />
           </div>
         </div>
 
         <div>
-          <label htmlFor="requestType" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="requestType" className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">
             Type of Request
           </label>
           <div className="mt-2">
@@ -109,7 +89,7 @@ const Form = () => {
               name="requestType"
               value={formData.requestType}
               onChange={handleChange}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-slate-100 dark:bg-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 transition-colors"
             >
               <option value="medical">Medical Assistance</option>
               <option value="volunteer">Volunteer Registration</option>
@@ -120,7 +100,7 @@ const Form = () => {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">
             Message / Description
           </label>
           <div className="mt-2">
@@ -131,7 +111,7 @@ const Form = () => {
               required
               value={formData.message}
               onChange={handleChange}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-slate-100 dark:bg-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 transition-colors"
             />
           </div>
         </div>
@@ -140,7 +120,7 @@ const Form = () => {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50"
+            className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 transition-colors"
           >
             {loading ? 'Submitting...' : 'Submit Request'}
           </button>
@@ -148,12 +128,12 @@ const Form = () => {
       </form>
 
       {result && (
-        <div className={`mt-6 p-4 rounded-md ${result.success ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+        <div className={`mt-6 p-4 rounded-md ${result.success ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>
           <p className="font-medium">{result.message}</p>
           {result.summary && (
             <div className="mt-2 text-sm">
-              <span className="font-bold underline text-green-800">Automated Summary:</span>
-              <p className="italic text-green-900">"{result.summary}"</p>
+              <span className="font-bold underline text-green-800 dark:text-green-200">Automated Summary:</span>
+              <p className="italic text-green-900 dark:text-green-100">"{result.summary}"</p>
             </div>
           )}
         </div>

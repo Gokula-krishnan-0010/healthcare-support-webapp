@@ -36,7 +36,7 @@ const Chatbot = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {isOpen ? (
-        <div className="bg-white border border-gray-200 rounded-lg shadow-2xl w-80 sm:w-96 flex flex-col h-96">
+        <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-2xl w-80 sm:w-96 flex flex-col h-96 transition-colors">
           <div className="bg-primary p-4 rounded-t-lg flex justify-between items-center text-white">
             <h3 className="font-bold">CareSupport Assistant</h3>
             <button onClick={() => setIsOpen(false)} className="text-white hover:text-gray-200">
@@ -48,31 +48,31 @@ const Chatbot = () => {
           <div className="flex-grow p-4 overflow-y-auto space-y-4">
             {messages.map((msg, index) => (
               <div key={index} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-3 rounded-lg text-sm ${msg.isUser ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'}`}>
+                <div className={`max-w-[80%] p-3 rounded-lg text-sm ${msg.isUser ? 'bg-primary text-white shadow-md' : 'bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-slate-100'}`}>
                   {msg.text}
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="max-w-[80%] p-3 rounded-lg text-sm bg-gray-100 text-gray-500 italic">
+                <div className="max-w-[80%] p-3 rounded-lg text-sm bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-slate-400 italic">
                   Assistant is typing...
                 </div>
               </div>
             )}
           </div>
-          <div className="p-4 border-t border-gray-100 flex gap-2">
+          <div className="p-4 border-t border-gray-100 dark:border-slate-700 flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Type a message..."
-              className="flex-grow border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:ring-primary focus:border-primary outline-none"
+              className="flex-grow border border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white rounded-md px-3 py-1.5 text-sm focus:ring-primary focus:border-primary outline-none transition-colors"
             />
             <button
               onClick={handleSend}
-              className="bg-primary text-white p-2 rounded-md hover:bg-sky-500"
+              className="bg-primary text-white p-2 rounded-md hover:bg-sky-500 transition-colors shadow-sm"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
